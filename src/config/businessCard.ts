@@ -10,15 +10,15 @@ import type { BusinessCardConfig } from '../types/businessCard'
 export const businessCardConfig: BusinessCardConfig = {
   // A. Profile Header & Brand Identity
   fullName: 'Lorem Ipsum',
-  displayName: 'Lorem Ipsum',
-  professionalTitle: 'Lorem Ipsum Dolor Sit Amet',
+  displayName: 'Enrique  S.  Junio',
+  professionalTitle: 'STI Santa Rosa Instructor',
   businessName: 'Lorem Ipsum',
   shortDescription:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   availability: 'Lorem ipsum dolor',
 
   // Profile Picture & Signature Calligraphy Logo
-  profileImage: '',
+  profileImage: '/images/sirjunio-profile.jpg',
   logoImage: '/images/sirjunio-logo.png',
   logoImageWhite: '/images/sirjunio-logo-white.png',
 
@@ -55,8 +55,8 @@ export const businessCardConfig: BusinessCardConfig = {
   projects: [
     {
       id: 'project-1',
-      title: 'Lorem Ipsum Dolor',
-      category: 'Consectetur Adipiscing',
+      title: 'Electronics Product Assembly and Servicing',
+      category: 'National Certificate ||',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
       tags: ['Lorem', 'Ipsum', 'Dolor', 'Sit'],
@@ -65,8 +65,8 @@ export const businessCardConfig: BusinessCardConfig = {
     },
     {
       id: 'project-2',
-      title: 'Sed Do Eiusmod',
-      category: 'Tempor Incididunt',
+      title: 'Mechatronics',
+      category: 'National Certificate ||',
       description:
         'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.',
       tags: ['Tempor', 'Incididunt', 'Labore'],
@@ -75,8 +75,8 @@ export const businessCardConfig: BusinessCardConfig = {
     },
     {
       id: 'project-3',
-      title: 'Magna Aliqua Ut',
-      category: 'Labore Et Dolore',
+      title: 'Computer System Servicing',
+      category: 'National Certificate ||',
       description:
         'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
       tags: ['Magna', 'Aliqua', 'Minim'],
