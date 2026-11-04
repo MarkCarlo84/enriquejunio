@@ -42,8 +42,8 @@ export interface AchievementItem {
   year?: string
   /** Detailed description or impact of the achievement */
   description?: string
-  /** Icon symbol: 'trophy' | 'award' | 'medal' | 'star' | 'sparkles' */
-  icon?: 'trophy' | 'award' | 'medal' | 'star' | 'sparkles'
+  /** Icon symbol: 'graduation-cap' | 'shield' | 'atom' | 'radio' | 'cpu' | 'layers' | 'cog' | 'flag' | 'gauge' | 'zap' | 'home' | 'crown' | 'medal' | 'building' | 'trophy' | 'award' | 'star' | 'sparkles' | string */
+  icon?: string
 }
 
 export interface FamilyMember {
@@ -108,6 +108,9 @@ export interface BusinessCardConfig {
 
   /** Facebook profile or page URL */
   facebookUrl?: string
+
+  /** Facebook display name or account handle */
+  facebookHandle?: string
 
   /** Gmail / Google Mail address or direct compose URL */
   gmailUrl?: string

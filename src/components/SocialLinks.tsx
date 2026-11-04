@@ -50,8 +50,20 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ config, index }) => {
     : (config.emailAddress ? `mailto:${config.emailAddress}` : '')
 
   const links = [
-    { key: 'gmail', name: 'Gmail', url: gmailUrl, icon: <GmailIcon /> },
-    { key: 'facebook', name: 'Facebook', url: config.facebookUrl?.trim(), icon: <FacebookIcon /> },
+    {
+      key: 'gmail',
+      name: 'Gmail',
+      url: gmailUrl,
+      icon: <GmailIcon />,
+      handle: config.gmailUrl ? handleFromUrl(gmailUrl) : undefined,
+    },
+    {
+      key: 'facebook',
+      name: 'Facebook',
+      url: config.facebookUrl?.trim(),
+      icon: <FacebookIcon />,
+      handle: config.facebookHandle?.trim() || (config.facebookUrl ? handleFromUrl(config.facebookUrl) : undefined),
+    },
   ].filter((l): l is typeof l & { url: string } => Boolean(l.url))
 
   // Only render if at least one platform is configured
@@ -63,7 +75,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ config, index }) => {
 
       <div className="social-grid" style={{ gridTemplateColumns: `repeat(${links.length}, 1fr)` }}>
         {links.map((link) => {
-          const handle = handleFromUrl(link.url)
+          const displayHandle = link.handle || handleFromUrl(link.url)
           return (
             <a
               key={link.key}
@@ -79,9 +91,11 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ config, index }) => {
                 {link.icon}
               </span>
               <span className="social-tile-name">{link.name}</span>
-              {handle && (
+              {displayHandle && (
                 <span className="social-tile-handle">
-                  {handle.includes('@') ? handle : `@${handle}`}
+                  {displayHandle.includes('@') || displayHandle.includes(' ')
+                    ? displayHandle
+                    : `@${displayHandle}`}
                 </span>
               )}
             </a>

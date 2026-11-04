@@ -22,14 +22,15 @@ export const businessCardConfig: BusinessCardConfig = {
   showBanner: false,
 
   // B. Contact Information
-  phoneNumber: '+1 234 567 8900',
-  phoneRaw: '+12345678900',
-  emailAddress: 'lorem.ipsum@example.com',
-  businessAddress: 'Lorem Ipsum, Dolor Sit Amet',
+  phoneNumber: '0945 145 6984',
+  phoneRaw: '09451456984',
+  emailAddress: 'enritech@yahoo.com',
+  businessAddress: '',
 
   // C. Social & Online Links
-  facebookUrl: 'https://www.facebook.com/loremipsum',
-  gmailUrl: 'lorem.ipsum@gmail.com',
+  facebookUrl: 'https://www.facebook.com/ricky.junio',
+  facebookHandle: 'Ricky Junio',
+  gmailUrl: 'rickyjunio3163@gmail.com',
 
   // Website / Portfolio
   websiteUrl: 'https://example.com',
@@ -37,40 +38,98 @@ export const businessCardConfig: BusinessCardConfig = {
   // National Certificates count badge
   projectsCount: '03',
 
-  // 1. Experiences Banner (15 titles)
+  // 1. Experiences (Academic & Non-Academic)
   achievements: [
-    { title: 'Lorem Ipsum Dolor Sit', icon: 'trophy' },
-    { title: 'Lorem Ipsum Consectetur', icon: 'medal' },
-    { title: 'Lorem Ipsum Adipiscing', icon: 'award' },
-    { title: 'Lorem Ipsum Eiusmod', icon: 'star' },
-    { title: 'Lorem Ipsum Tempor', icon: 'sparkles' },
-    { title: 'Lorem Ipsum Incididunt', icon: 'trophy' },
-    { title: 'Lorem Ipsum Labore', icon: 'medal' },
-    { title: 'Lorem Ipsum Dolore', icon: 'award' },
-    { title: 'Lorem Ipsum Magna', icon: 'star' },
-    { title: 'Lorem Ipsum Aliqua', icon: 'sparkles' },
-    { title: 'Lorem Ipsum Minim', icon: 'trophy' },
-    { title: 'Lorem Ipsum Veniam', icon: 'medal' },
-    { title: 'Lorem Ipsum Nostrud', icon: 'award' },
-    { title: 'Lorem Ipsum Ullamco', icon: 'star' },
-    { title: 'Lorem Ipsum Laboris', icon: 'sparkles' },
+    // A. ACADEMIC EXPERIENCE
+    {
+      title: 'Retired College Professor',
+      category: 'A. ACADEMIC EXPERIENCE',
+      icon: 'graduation-cap',
+    },
+    {
+      title: 'Former Commandant of HIA, MIT, and Assumption College',
+      category: 'A. ACADEMIC EXPERIENCE',
+      icon: 'shield',
+    },
+    {
+      title: 'Former Instructor Physics, Mathematics, and Technology @Muntinlupa Institute of Technology',
+      category: 'A. ACADEMIC EXPERIENCE',
+      icon: 'atom',
+    },
+    {
+      title: 'Former Department Head of Electronics and Telecommunication @Philippine Science and Technology Centers',
+      category: 'A. ACADEMIC EXPERIENCE',
+      icon: 'radio',
+    },
+    {
+      title: 'Former Instructor Hardware Department @AMA College',
+      category: 'A. ACADEMIC EXPERIENCE',
+      icon: 'cpu',
+    },
+    {
+      title: 'Former Technology Program Head @PUP Biñan',
+      category: 'A. ACADEMIC EXPERIENCE',
+      icon: 'layers',
+    },
+    {
+      title: 'Instructor & Engineering Program Head @STI Santa Rosa',
+      category: 'A. ACADEMIC EXPERIENCE',
+      icon: 'cog',
+    },
+
+    // B. NON-ACADEMIC EXPERIENCE / AFFILIATIONS
+    {
+      title: 'Reservist – Armed Forces of the Philippines (AFP)',
+      category: 'B. NON-ACADEMIC EXPERIENCE / AFFILIATIONS',
+      icon: 'flag',
+    },
+    {
+      title: 'TESDA Assessor – Instrumentation and Process Control',
+      category: 'B. NON-ACADEMIC EXPERIENCE / AFFILIATIONS',
+      icon: 'gauge',
+    },
+    {
+      title: 'TESDA – Electrical Installation and Maintenance',
+      category: 'B. NON-ACADEMIC EXPERIENCE / AFFILIATIONS',
+      icon: 'zap',
+    },
+    {
+      title: 'Member – Federation of Homeowners Associations of Barangay Santo Tomas',
+      category: 'B. NON-ACADEMIC EXPERIENCE / AFFILIATIONS',
+      icon: 'home',
+    },
+    {
+      title: 'President @Welmanville Biñan Homeowners Association',
+      category: 'B. NON-ACADEMIC EXPERIENCE / AFFILIATIONS',
+      icon: 'crown',
+    },
+    {
+      title: 'Vice President @EARIST ROTC Synchronous Association',
+      category: 'B. NON-ACADEMIC EXPERIENCE / AFFILIATIONS',
+      icon: 'medal',
+    },
+    {
+      title: 'Facilities Supervisor (cum Technician) @Dubai, UAE',
+      category: 'B. NON-ACADEMIC EXPERIENCE / AFFILIATIONS',
+      icon: 'building',
+    },
   ],
 
   // 2. Family (Wife, Son, Daughter)
   family: [
     {
       relation: 'Wife',
-      name: "Wife's Name",
+      name: "Eleanor Tabirao Junio",
       note: 'Spouse',
     },
     {
       relation: 'Son',
-      name: "Son's Name",
+      name: "Engr. John Oswald Erickson T. Junio",
       note: 'Son',
     },
     {
       relation: 'Daughter',
-      name: "Daughter's Name",
+      name: "Ar. Johana Ericka T. Junio",
       note: 'Daughter',
     },
   ],
@@ -79,17 +138,16 @@ export const businessCardConfig: BusinessCardConfig = {
   education: [
     {
       level: 'College Degree',
-      degree: 'Bachelor of Science in ...',
-      institution: 'College / University Name',
-      specialization: 'Major in ...',
+      degree: 'Bachelor of Science in Industrial Technology',
+      institution: 'Eulogio Rodriguez Institute of Science and Technology (EARIST)',
+      specialization: 'Major in Electronics',
       year: 'Graduated',
       description: 'Undergraduate degree program.',
     },
     {
       level: "Master's Degree",
-      degree: 'Master of Arts in ...',
-      institution: 'Graduate School / University Name',
-      specialization: 'Major in ...',
+      degree: 'Master of Arts Majoring Administration and Supervision',
+      institution: 'Eulogio Rodriguez Institute of Science and Technology (EARIST)',
       year: 'Completed',
       description: 'Postgraduate degree program.',
     },

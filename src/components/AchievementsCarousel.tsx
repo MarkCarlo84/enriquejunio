@@ -1,6 +1,26 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { Trophy, Award, Medal, Star, Sparkles, X } from 'lucide-react'
+import {
+  GraduationCap,
+  Shield,
+  Atom,
+  Radio,
+  Cpu,
+  Layers,
+  Cog,
+  Flag,
+  Gauge,
+  Zap,
+  Home,
+  Crown,
+  Medal,
+  Building2,
+  Trophy,
+  Award,
+  Star,
+  Sparkles,
+  X,
+} from 'lucide-react'
 import type { AchievementItem } from '../types/businessCard'
 import { SectionHeader } from './SectionHeader'
 
@@ -45,6 +65,21 @@ export const AchievementsCarousel: React.FC<AchievementsCarouselProps> = ({
     }
   }, [isModalOpen, handleClose])
 
+  // Group experiences by category for the modal list view
+  const groupedExperiences = React.useMemo(() => {
+    const groups: { category: string; items: AchievementItem[] }[] = []
+    items.forEach((item) => {
+      const cat = item.category || 'Experiences'
+      let g = groups.find((grp) => grp.category === cat)
+      if (!g) {
+        g = { category: cat, items: [] }
+        groups.push(g)
+      }
+      g.items.push(item)
+    })
+    return groups
+  }, [items])
+
   if (items.length === 0) return null
 
   // Split into 2 rows for split-directional marquee banner
@@ -70,20 +105,84 @@ export const AchievementsCarousel: React.FC<AchievementsCarouselProps> = ({
   const fullTrack1 = [...track1Half, ...track1Half]
   const fullTrack2 = [...track2Half, ...track2Half]
 
-  const renderIcon = (type?: string) => {
+  const renderIcon = (type?: string, size = 15) => {
     switch (type) {
+      case 'graduation-cap':
+      case 'professor':
+        return <GraduationCap size={size} strokeWidth={2.2} />
+      case 'shield':
+      case 'commandant':
+        return <Shield size={size} strokeWidth={2.2} />
+      case 'atom':
+      case 'physics':
+        return <Atom size={size} strokeWidth={2.2} />
+      case 'radio':
+      case 'telecom':
+        return <Radio size={size} strokeWidth={2.2} />
+      case 'cpu':
+      case 'hardware':
+        return <Cpu size={size} strokeWidth={2.2} />
+      case 'layers':
+      case 'technology':
+        return <Layers size={size} strokeWidth={2.2} />
+      case 'cog':
+      case 'engineering':
+        return <Cog size={size} strokeWidth={2.2} />
+      case 'flag':
+      case 'reservist':
+        return <Flag size={size} strokeWidth={2.2} />
+      case 'gauge':
+      case 'assessor':
+        return <Gauge size={size} strokeWidth={2.2} />
+      case 'zap':
+      case 'electrical':
+        return <Zap size={size} strokeWidth={2.2} />
+      case 'home':
+      case 'homeowners':
+        return <Home size={size} strokeWidth={2.2} />
+      case 'crown':
+      case 'president':
+        return <Crown size={size} strokeWidth={2.2} />
       case 'medal':
-        return <Medal size={13} strokeWidth={2.2} />
+      case 'rotc':
+        return <Medal size={size} strokeWidth={2.2} />
+      case 'building':
+      case 'building-2':
+      case 'facilities':
+        return <Building2 size={size} strokeWidth={2.2} />
       case 'star':
-        return <Star size={13} strokeWidth={2.2} />
+        return <Star size={size} strokeWidth={2.2} />
       case 'sparkles':
-        return <Sparkles size={13} strokeWidth={2.2} />
+        return <Sparkles size={size} strokeWidth={2.2} />
       case 'award':
-        return <Award size={13} strokeWidth={2.2} />
+        return <Award size={size} strokeWidth={2.2} />
       case 'trophy':
       default:
-        return <Trophy size={13} strokeWidth={2.2} />
+        return <Trophy size={size} strokeWidth={2.2} />
     }
+  }
+
+  // Resolves bespoke contextual icon based on icon identifier or title semantics
+  const getExperienceIcon = (item: AchievementItem, size = 15) => {
+    if (item.icon) {
+      return renderIcon(item.icon, size)
+    }
+    const t = (item.title || '').toLowerCase()
+    if (t.includes('professor') || t.includes('college')) return renderIcon('graduation-cap', size)
+    if (t.includes('commandant') || t.includes('assumption')) return renderIcon('shield', size)
+    if (t.includes('physics') || t.includes('mathematics')) return renderIcon('atom', size)
+    if (t.includes('telecommunication') || t.includes('electronics')) return renderIcon('radio', size)
+    if (t.includes('hardware') || t.includes('ama')) return renderIcon('cpu', size)
+    if (t.includes('technology program') || t.includes('pup')) return renderIcon('layers', size)
+    if (t.includes('engineering') || t.includes('sti')) return renderIcon('cog', size)
+    if (t.includes('reservist') || t.includes('afp')) return renderIcon('flag', size)
+    if (t.includes('assessor') || t.includes('instrumentation')) return renderIcon('gauge', size)
+    if (t.includes('electrical')) return renderIcon('zap', size)
+    if (t.includes('homeowners') || t.includes('santo tomas')) return renderIcon('home', size)
+    if (t.includes('president') || t.includes('welmanville')) return renderIcon('crown', size)
+    if (t.includes('rotc') || t.includes('earist')) return renderIcon('medal', size)
+    if (t.includes('facilities') || t.includes('dubai')) return renderIcon('building', size)
+    return renderIcon('trophy', size)
   }
 
   return (
@@ -118,7 +217,7 @@ export const AchievementsCarousel: React.FC<AchievementsCarouselProps> = ({
                 aria-label={`View experience: ${item.title}`}
               >
                 <span className="achievement-pill-icon" aria-hidden="true">
-                  {renderIcon(item.icon)}
+                  {getExperienceIcon(item, 15)}
                 </span>
                 <span className="achievement-pill-title">{item.title}</span>
               </button>
@@ -136,7 +235,7 @@ export const AchievementsCarousel: React.FC<AchievementsCarouselProps> = ({
                 aria-label={`View experience: ${item.title}`}
               >
                 <span className="achievement-pill-icon" aria-hidden="true">
-                  {renderIcon(item.icon)}
+                  {getExperienceIcon(item, 15)}
                 </span>
                 <span className="achievement-pill-title">{item.title}</span>
               </button>
@@ -176,40 +275,50 @@ export const AchievementsCarousel: React.FC<AchievementsCarouselProps> = ({
               </button>
             </div>
 
-            {/* Modal List */}
+            {/* Modal Grouped List */}
             <div className="experience-modal-body">
-              <div className="experience-modal-list">
-                {items.map((item, idx) => {
-                  const isSelected = selectedExperience?.title === item.title
-                  return (
-                    <div
-                      key={item.id || idx}
-                      className={`experience-modal-item ${isSelected ? 'experience-modal-item--selected' : ''}`}
-                    >
-                      <div className="experience-modal-item-left">
-                        <span className="experience-modal-num">
-                          {String(idx + 1).padStart(2, '0')}
-                        </span>
-                        <div className="experience-modal-icon-box" aria-hidden="true">
-                          {renderIcon(item.icon)}
+              {groupedExperiences.map((group, groupIdx) => (
+                <div key={group.category || groupIdx} className="experience-modal-group">
+                  <div className="experience-modal-group-header">
+                    <span className="experience-modal-group-title">{group.category}</span>
+                    <span className="experience-modal-group-count">
+                      {group.items.length} {group.items.length === 1 ? 'record' : 'records'}
+                    </span>
+                  </div>
+                  <div className="experience-modal-list">
+                    {group.items.map((item, itemIdx) => {
+                      const isSelected = selectedExperience?.title === item.title
+                      return (
+                        <div
+                          key={item.id || `${groupIdx}-${itemIdx}`}
+                          className={`experience-modal-item ${isSelected ? 'experience-modal-item--selected' : ''}`}
+                        >
+                          <div className="experience-modal-item-left">
+                            <span className="experience-modal-num">
+                              {String(itemIdx + 1).padStart(2, '0')}
+                            </span>
+                            <div className="experience-modal-icon-box" aria-hidden="true">
+                              {getExperienceIcon(item, 18)}
+                            </div>
+                          </div>
+                          <div className="experience-modal-item-text">
+                            <h4 className="experience-modal-item-title">{item.title}</h4>
+                            {item.description && (
+                              <p className="experience-modal-item-desc">{item.description}</p>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                      <div className="experience-modal-item-text">
-                        <h4 className="experience-modal-item-title">{item.title}</h4>
-                        {item.description && (
-                          <p className="experience-modal-item-desc">{item.description}</p>
-                        )}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
 
             {/* Modal Footer */}
             <div className="experience-modal-footer">
               <span className="experience-modal-counter">
-                Showing all {items.length} experiences
+                Showing all {items.length} experiences across {groupedExperiences.length} categories
               </span>
               <button
                 type="button"

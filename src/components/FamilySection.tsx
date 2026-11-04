@@ -49,17 +49,17 @@ export const FamilySection: React.FC<FamilySectionProps> = ({ family, index }) =
               key={member.id || idx}
               className={`family-card ${isFullWidth ? 'family-card--full' : 'family-card--compact'}`}
             >
-              <div
-                className={`family-icon-box family-icon-box--${member.relation.toLowerCase().replace(/[^a-z]/g, '')}`}
-                aria-hidden="true"
-              >
-                {getRelationIcon(member.relation)}
+              <div className="family-card-header">
+                <div
+                  className={`family-icon-box family-icon-box--${member.relation.toLowerCase().replace(/[^a-z]/g, '')}`}
+                  aria-hidden="true"
+                >
+                  {getRelationIcon(member.relation)}
+                </div>
+                <span className="family-relation-badge">{member.relation}</span>
               </div>
 
               <div className="family-text">
-                <div className="family-header-row">
-                  <span className="family-relation-badge">{member.relation}</span>
-                </div>
                 <h3 className="family-member-name">{member.name}</h3>
                 {member.note && <p className="family-member-note">{member.note}</p>}
               </div>

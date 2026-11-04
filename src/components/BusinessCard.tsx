@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import type { BusinessCardConfig } from '../types/businessCard'
 import { ProfileHeader } from './ProfileHeader'
 import { CardActions } from './CardActions'
@@ -10,7 +10,8 @@ import { ContactDetails } from './ContactDetails'
 import { SocialLinks } from './SocialLinks'
 import { Footer } from './Footer'
 import { Reveal } from './Reveal'
-import { Sun, Moon } from 'lucide-react'
+import { Sun, Moon, QrCode } from 'lucide-react'
+import { QrCodeModal } from './QrCodeModal'
 
 interface BusinessCardProps {
   config: BusinessCardConfig
@@ -37,6 +38,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
 
   const carouselItemCount = config.projects?.length ?? 0
   const projectCount = config.projectsCount ?? carouselItemCount
+  const [isQrOpen, setIsQrOpen] = useState(false)
   let sectionIndex = 0
   const nextIndex = () => String(++sectionIndex).padStart(2, '0')
 
@@ -50,23 +52,44 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
       <div className="card-edge-light" aria-hidden="true" />
       <div className="card-cursor-sheen" aria-hidden="true" />
 
-      {/* Discreet Theme Switcher */}
-      <button
-        type="button"
-        id="theme-toggle"
-        className="theme-toggle-btn"
-        onClick={onToggleTheme}
-        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-        title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-      >
-        <span className="theme-toggle-icon" key={theme}>
-          {theme === 'dark' ? (
-            <Sun size={15} strokeWidth={2} />
-          ) : (
-            <Moon size={15} strokeWidth={2} />
-          )}
-        </span>
-      </button>
+      {/* Top Header Controls (QR Code Share & Theme Switcher) */}
+      <div className="header-top-actions">
+        <button
+          type="button"
+          id="qr-toggle"
+          className="header-action-btn qr-toggle-btn"
+          onClick={() => setIsQrOpen(true)}
+          aria-label="Share via QR Code"
+          title="Share via QR Code"
+        >
+          <QrCode size={15} strokeWidth={2.1} />
+        </button>
+
+        <button
+          type="button"
+          id="theme-toggle"
+          className="header-action-btn theme-toggle-btn"
+          onClick={onToggleTheme}
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+        >
+          <span className="theme-toggle-icon" key={theme}>
+            {theme === 'dark' ? (
+              <Sun size={15} strokeWidth={2} />
+            ) : (
+              <Moon size={15} strokeWidth={2} />
+            )}
+          </span>
+        </button>
+      </div>
+
+      {/* QR Code Share Modal Dialog */}
+      <QrCodeModal
+        isOpen={isQrOpen}
+        onClose={() => setIsQrOpen(false)}
+        config={config}
+        onToast={onToast}
+      />
 
       {/* Full-Bleed Profile Header (Banner & Avatar) */}
       <ProfileHeader
