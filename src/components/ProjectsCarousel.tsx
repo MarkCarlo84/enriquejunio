@@ -58,9 +58,9 @@ export const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects, in
 
   return (
     <section
-      className="panel projects-panel"
+      className="panel projects-panel certificates-panel"
       aria-roledescription="carousel"
-      aria-labelledby="projects-heading"
+      aria-labelledby="certificates-heading"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
@@ -68,9 +68,9 @@ export const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects, in
     >
       <SectionHeader
         index={index}
-        title="Featured"
-        accent="Projects"
-        id="projects-heading"
+        title="National"
+        accent="Certificates"
+        id="certificates-heading"
         meta={
           <span className="meta-counter" aria-live="polite">
             <strong>{String(currentIndex + 1).padStart(2, '0')}</strong>
@@ -85,7 +85,7 @@ export const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects, in
         <div
           className={`story-progress ${isPaused ? 'is-paused' : ''}`}
           role="tablist"
-          aria-label="Project slides"
+          aria-label="National Certificate slides"
         >
           {items.map((project, idx) => (
             <button
@@ -93,7 +93,7 @@ export const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects, in
               type="button"
               role="tab"
               aria-selected={idx === currentIndex}
-              aria-label={`Go to slide ${idx + 1}: ${project.title}`}
+              aria-label={`Go to certificate ${idx + 1}: ${project.title}`}
               className={`story-segment ${idx < currentIndex ? 'is-complete' : ''} ${
                 idx === currentIndex ? 'is-active' : ''
               }`}
@@ -163,19 +163,19 @@ export const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects, in
                 <div className="carousel-arrows-inline">
                   <button
                     type="button"
-                    id="project-prev-btn"
+                    id="cert-prev-btn"
                     className="carousel-arrow"
                     onClick={handlePrev}
-                    aria-label="Previous project"
+                    aria-label="Previous certificate"
                   >
                     <ChevronLeft size={17} strokeWidth={2.2} />
                   </button>
                   <button
                     type="button"
-                    id="project-next-btn"
+                    id="cert-next-btn"
                     className="carousel-arrow"
                     onClick={handleNext}
-                    aria-label="Next project"
+                    aria-label="Next certificate"
                   >
                     <ChevronRight size={17} strokeWidth={2.2} />
                   </button>
@@ -184,13 +184,13 @@ export const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects, in
             </div>
           )}
 
-          {/* Project Content */}
+          {/* Certificate Content */}
           <div className="project-content">
             <h3 className="project-title">{activeProject.title}</h3>
             <p className="project-description">{activeProject.description}</p>
 
             {activeProject.tags && activeProject.tags.length > 0 && (
-              <ul className="project-tags" aria-label="Technologies used">
+              <ul className="project-tags" aria-label="Core competencies and skills">
                 {activeProject.tags.map((tag) => (
                   <li key={tag} className="project-tag">
                     {tag}
@@ -205,9 +205,9 @@ export const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({ projects, in
                 target="_blank"
                 rel="noopener noreferrer"
                 className="project-link"
-                aria-label={`View ${activeProject.title} project`}
+                aria-label={`View ${activeProject.title} certificate`}
               >
-                <span>View project</span>
+                <span>View certificate</span>
                 <ArrowUpRight size={15} strokeWidth={2.2} aria-hidden="true" />
               </a>
             )}

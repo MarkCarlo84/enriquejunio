@@ -8,21 +8,28 @@ interface SocialLinksProps {
   index: string
 }
 
-/** Extracts a readable handle from a profile URL, e.g. ".../kramcrl/" -> "kramcrl" */
+/** Extracts a readable handle from a profile URL or email */
 function handleFromUrl(url: string): string {
   try {
-    const path = new URL(url).pathname.replace(/\/+$/, '')
+    if (url.startsWith('mailto:')) {
+      return url.replace('mailto:', '').split('?')[0]
+    }
+    if (url.includes('@') && !url.startsWith('http')) {
+      return url
+    }
+    const parsed = new URL(url)
+    const toParam = parsed.searchParams.get('to')
+    if (toParam) return toParam
+    const path = parsed.pathname.replace(/\/+$/, '')
     return path.split('/').filter(Boolean).pop() || ''
   } catch {
-    return ''
+    return url.replace(/^mailto:/, '')
   }
 }
 
-const InstagramIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
-    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+const GmailIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
   </svg>
 )
 
@@ -33,8 +40,17 @@ const FacebookIcon = () => (
 )
 
 export const SocialLinks: React.FC<SocialLinksProps> = ({ config, index }) => {
+  const rawGmail = (config.gmailUrl || config.instagramUrl || '').trim()
+  const gmailUrl = rawGmail
+    ? (rawGmail.startsWith('http') || rawGmail.startsWith('mailto:')
+        ? rawGmail
+        : rawGmail.includes('@')
+          ? `mailto:${rawGmail}`
+          : `https://mail.google.com/mail/?view=cm&fs=1&to=${rawGmail}`)
+    : (config.emailAddress ? `mailto:${config.emailAddress}` : '')
+
   const links = [
-    { key: 'instagram', name: 'Instagram', url: config.instagramUrl?.trim(), icon: <InstagramIcon /> },
+    { key: 'gmail', name: 'Gmail', url: gmailUrl, icon: <GmailIcon /> },
     { key: 'facebook', name: 'Facebook', url: config.facebookUrl?.trim(), icon: <FacebookIcon /> },
   ].filter((l): l is typeof l & { url: string } => Boolean(l.url))
 
@@ -63,7 +79,11 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ config, index }) => {
                 {link.icon}
               </span>
               <span className="social-tile-name">{link.name}</span>
-              {handle && <span className="social-tile-handle">@{handle}</span>}
+              {handle && (
+                <span className="social-tile-handle">
+                  {handle.includes('@') ? handle : `@${handle}`}
+                </span>
+              )}
             </a>
           )
         })}

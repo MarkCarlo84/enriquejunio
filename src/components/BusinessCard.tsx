@@ -2,7 +2,9 @@ import React, { useCallback, useRef } from 'react'
 import type { BusinessCardConfig } from '../types/businessCard'
 import { ProfileHeader } from './ProfileHeader'
 import { CardActions } from './CardActions'
-import { GraduateProfileSection } from './GraduateProfileSection'
+import { EducationSection } from './EducationSection'
+import { AchievementsCarousel } from './AchievementsCarousel'
+import { FamilySection } from './FamilySection'
 import { ProjectsCarousel } from './ProjectsCarousel'
 import { ContactDetails } from './ContactDetails'
 import { SocialLinks } from './SocialLinks'
@@ -80,29 +82,46 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
           <CardActions config={config} onToast={onToast} />
         </Reveal>
 
-        {/* IT Graduate Profile & Competencies Section */}
-        {config.profileInfo && (
+        {/* 1. Experiences Carousel */}
+        {config.achievements && config.achievements.length > 0 && (
           <Reveal>
-            <GraduateProfileSection
-              config={config}
+            <AchievementsCarousel
+              achievements={config.achievements}
               index={nextIndex()}
             />
           </Reveal>
         )}
 
-        {/* Projects Showcase Carousel */}
+        {/* 2. Family Section */}
+        {config.family && config.family.length > 0 && (
+          <Reveal>
+            <FamilySection family={config.family} index={nextIndex()} />
+          </Reveal>
+        )}
+
+        {/* 3. Educational Background Section */}
+        {config.education && config.education.length > 0 && (
+          <Reveal>
+            <EducationSection
+              education={config.education}
+              index={nextIndex()}
+            />
+          </Reveal>
+        )}
+
+        {/* 4. National Certificates Showcase Carousel */}
         {carouselItemCount > 0 && (
           <Reveal>
             <ProjectsCarousel projects={config.projects} index={nextIndex()} />
           </Reveal>
         )}
 
-        {/* Contact Details (Phone, Email, Location) */}
+        {/* 5. Contact Details (Get in Touch) */}
         <Reveal>
           <ContactDetails config={config} index={nextIndex()} onToast={onToast} />
         </Reveal>
 
-        {/* Social Media & Developer Links */}
+        {/* 6. Social Media & Developer Links (Find me Online) */}
         <Reveal>
           <SocialLinks config={config} index={nextIndex()} />
         </Reveal>

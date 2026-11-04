@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12131a" />
+      <stop offset="100%" stop-color="#07080b" />
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e2e4ea" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" />
+  <rect width="62" height="62" x="1" y="1" rx="15" fill="none" stroke="#2d303e" stroke-width="1.5" />
+  <g transform="translate(10.5, 12.8) scale(1.6)" fill="none" stroke="url(#waveGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 8.32a7.43 7.43 0 0 1 0 7.36" />
+    <path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58" />
+    <path d="M12.91 4.1a15.91 15.91 0 0 1 .01 15.8" />
+    <path d="M16.37 2a20.16 20.16 0 0 1 0 20" />
+  </g>
+</svg>

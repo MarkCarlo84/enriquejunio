@@ -39,7 +39,7 @@ function App() {
     }
 
     // Document Title
-    document.title = config.businessName || config.fullName || 'Lorem Ipsum'
+    document.title = config.businessName || 'Sir Junio'
   }, [theme, config])
 
   const toggleTheme = () => {
@@ -48,9 +48,11 @@ function App() {
 
   return (
     <div className="page-viewport">
-      {/* Layered monochrome backdrop: spotlight, hairline grid, film grain */}
+      {/* Layered monochrome backdrop: spotlight, ambient orbs, hairline grid, film grain */}
       <div className="backdrop" aria-hidden="true">
         <div className="backdrop-spotlight" />
+        <div className="backdrop-orb backdrop-orb--1" />
+        <div className="backdrop-orb backdrop-orb--2" />
         <div className="backdrop-grid" />
         <div className="backdrop-grain" />
       </div>

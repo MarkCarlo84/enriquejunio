@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { UserPlus, Share2, Check } from 'lucide-react'
 import type { BusinessCardConfig } from '../types/businessCard'
-import { downloadVCard } from '../utils/vcard'
+import { saveContactToPhone } from '../utils/vcard'
 
 interface CardActionsProps {
   config: BusinessCardConfig
@@ -12,12 +12,18 @@ export const CardActions: React.FC<CardActionsProps> = ({ config, onToast }) => 
   const [isSaved, setIsSaved] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
 
-  // Handle Save Contact (.vcf download)
+  // Handle Save Contact (Opens native Contacts app with pre-filled number or downloads .vcf)
   const handleSaveContact = () => {
     try {
-      downloadVCard(config)
+      const res = saveContactToPhone(config)
       setIsSaved(true)
-      onToast('Contact card downloaded successfully')
+      if (res.method === 'android_intent') {
+        onToast('Opening Contacts app...')
+      } else if (res.method === 'ios_vcard') {
+        onToast('Opening Contact card...')
+      } else {
+        onToast('Contact card downloaded')
+      }
       setTimeout(() => setIsSaved(false), 2500)
     } catch {
       onToast('Could not save contact card')

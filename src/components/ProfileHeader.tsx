@@ -27,11 +27,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
 }) => {
   const photo = avatarSrc || config.profileImage
   const hasAvatar = Boolean(photo?.trim())
-  const hasLogo = Boolean((config.logoImage || config.logoImageWhite)?.trim())
   const hasDescription = Boolean(config.shortDescription?.trim())
-
-  const darkLogo = config.logoImageWhite || config.logoImage
-  const lightLogo = config.logoImage || config.logoImageWhite
 
   // Real name leads (it's a business card); brand handle sits beneath it
   const primaryName = config.displayName?.trim() || config.fullName
@@ -39,7 +35,14 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
     config.displayName?.trim() && config.displayName !== config.fullName ? config.fullName : null
 
   // Quick-facts strip
-  const degree = degreeAcronym(config.profileInfo?.degree)
+  const highestDegree =
+    config.education && config.education.length > 0
+      ? config.education[config.education.length - 1].degree
+      : config.profileInfo?.degree
+  const degree =
+    config.education && config.education.length > 1
+      ? 'MA & BS'
+      : degreeAcronym(highestDegree)
   const city = config.businessAddress?.split(',')[0]?.trim()
   const displayProjectCount =
     config.projectsCount != null
@@ -52,16 +55,17 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
 
   const facts = [
     degree && { label: 'Degree', value: degree },
-    displayProjectCount && { label: 'Projects', value: displayProjectCount },
+    displayProjectCount && { label: 'NC II', value: displayProjectCount },
     city && { label: 'Based in', value: city },
   ].filter(Boolean) as { label: string; value: string }[]
 
   return (
     <header className="card-header">
-      {/* Obsidian Banner — reads like the face of a premium metal card */}
-      <div className="header-banner">
+      {/* Obsidian Glass Backdrop behind profile — authentic banner glass effect */}
+      <div className="header-banner header-banner--glass" aria-hidden="true">
         <div className="banner-noise" aria-hidden="true" />
         <div className="banner-spotlight" aria-hidden="true" />
+        <div className="banner-lines" aria-hidden="true" />
         <div className="banner-sweep" aria-hidden="true" />
 
         {/* Precision Card Edge & Corner Notches */}
@@ -79,42 +83,13 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           </div>
         </div>
 
-        {/* Brand identity: Signature logo with dramatic zoom, ambient backlight halo and write-on reveal */}
-        {hasLogo ? (
-          <div className="banner-logo-wrapper">
-            <div className="banner-logo-halo" aria-hidden="true" />
-            <div className="banner-brand-logo-frame">
-              {/* White logo for Dark Mode */}
-              {darkLogo && (
-                <img
-                  src={darkLogo}
-                  alt={config.businessName || config.fullName}
-                  className="banner-brand-logo banner-brand-logo--dark"
-                  loading="eager"
-                  decoding="async"
-                />
-              )}
-              {/* Black logo for Light Mode */}
-              {lightLogo && (
-                <img
-                  src={lightLogo}
-                  alt={config.businessName || config.fullName}
-                  className="banner-brand-logo banner-brand-logo--light"
-                  loading="eager"
-                  decoding="async"
-                />
-              )}
-            </div>
-          </div>
-        ) : (
-          <div className="banner-logo-wrapper">
-            <div className="banner-logo-halo" aria-hidden="true" />
-            <div className="banner-brand-text-frame">
-              <span className="banner-brand-text">{config.businessName || config.fullName}</span>
-              <span className="banner-signature-sub">LOREM IPSUM</span>
-            </div>
-          </div>
-        )}
+        {/* Ambient Center Glow & Animated NFC Pulse Waves behind Avatar */}
+        <div className="banner-glass-center-glow" aria-hidden="true" />
+        <div className="nfc-pulse-waves" aria-hidden="true">
+          <span className="nfc-wave nfc-wave--1" />
+          <span className="nfc-wave nfc-wave--2" />
+          <span className="nfc-wave nfc-wave--3" />
+        </div>
 
         {/* Soft bottom vignette for smooth gradient transition into avatar overlap */}
         <div className="banner-bottom-vignette" aria-hidden="true" />

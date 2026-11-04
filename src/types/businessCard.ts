@@ -14,10 +14,52 @@ export interface ProjectItem {
   githubUrl?: string
 }
 
+export interface EducationItem {
+  id?: string
+  /** Level or category, e.g. "College Degree" | "Master's Degree" */
+  level?: string
+  /** Official degree title, e.g. "Bachelor of Science in ..." or "Master of Arts in ..." */
+  degree: string
+  /** College, university, or academic institution */
+  institution?: string
+  /** Major, specialization, or concentration */
+  specialization?: string
+  /** Graduation year or inclusive years, e.g. "2018 - 2022" or "Graduated" */
+  year?: string
+  /** Optional academic highlights, honors, or thesis title */
+  description?: string
+}
+
+export interface AchievementItem {
+  id?: string
+  /** Title of the award, honor, or milestone */
+  title: string
+  /** Category or award tier, e.g. "Faculty Recognition", "National Certification", "Award" */
+  category?: string
+  /** Issuing organization or institution, e.g. "STI College Santa Rosa" */
+  issuer?: string
+  /** Year, date, or period awarded, e.g. "2024" or "2022 - 2023" */
+  year?: string
+  /** Detailed description or impact of the achievement */
+  description?: string
+  /** Icon symbol: 'trophy' | 'award' | 'medal' | 'star' | 'sparkles' */
+  icon?: 'trophy' | 'award' | 'medal' | 'star' | 'sparkles'
+}
+
+export interface FamilyMember {
+  id?: string
+  /** Relationship to the owner, e.g. "Wife" | "Son" | "Daughter" */
+  relation: string
+  /** Full name of the family member */
+  name: string
+  /** Optional personal note, dedication, or detail */
+  note?: string
+}
+
 export interface GraduateProfileInfo {
   degree: string
   specialization: string
-  highlights: string[]
+  highlights?: string[]
   bio: string
 }
 
@@ -67,7 +109,10 @@ export interface BusinessCardConfig {
   /** Facebook profile or page URL */
   facebookUrl?: string
 
-  /** Instagram profile URL */
+  /** Gmail / Google Mail address or direct compose URL */
+  gmailUrl?: string
+
+  /** Instagram profile URL (fallback) */
   instagramUrl?: string
 
   /** GitHub profile or repository URL */
@@ -76,8 +121,17 @@ export interface BusinessCardConfig {
   /** Optional website or portfolio URL */
   websiteUrl?: string
 
+  /** Dedicated educational background milestones (College Degree, Master's Degree, etc.) */
+  education?: EducationItem[]
+
+  /** Dedicated honors, key achievements, recognitions, and milestones */
+  achievements?: AchievementItem[]
+
   /** Dedicated IT Graduate Profile & Competency Information */
   profileInfo?: GraduateProfileInfo
+
+  /** Immediate family members (Wife, Son, Daughter, etc.) */
+  family?: FamilyMember[]
 
   /** Total project count display (e.g. "20+") */
   projectsCount?: string | number
@@ -93,4 +147,7 @@ export interface BusinessCardConfig {
 
   /** Hex color for button hover states */
   accentHover?: string
+
+  /** Whether to show the top decorative banner (default: false) */
+  showBanner?: boolean
 }

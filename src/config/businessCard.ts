@@ -9,18 +9,17 @@ import type { BusinessCardConfig } from '../types/businessCard'
  */
 export const businessCardConfig: BusinessCardConfig = {
   // A. Profile Header & Brand Identity
-  fullName: 'Lorem Ipsum',
+  fullName: 'Sir Junio',
   displayName: 'Enrique  S.  Junio',
   professionalTitle: 'STI Santa Rosa Instructor',
-  businessName: 'Lorem Ipsum',
+  businessName: 'Sir Junio',
   shortDescription:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   availability: 'Lorem ipsum dolor',
 
-  // Profile Picture & Signature Calligraphy Logo
+  // Profile Picture (Banner removed)
   profileImage: '/images/sirjunio-profile.jpg',
-  logoImage: '/images/sirjunio-logo.png',
-  logoImageWhite: '/images/sirjunio-logo-white.png',
+  showBanner: false,
 
   // B. Contact Information
   phoneNumber: '+1 234 567 8900',
@@ -28,60 +27,105 @@ export const businessCardConfig: BusinessCardConfig = {
   emailAddress: 'lorem.ipsum@example.com',
   businessAddress: 'Lorem Ipsum, Dolor Sit Amet',
 
-  // C. Social & Developer Links
+  // C. Social & Online Links
   facebookUrl: 'https://www.facebook.com/loremipsum',
-  instagramUrl: 'https://www.instagram.com/loremipsum',
+  gmailUrl: 'lorem.ipsum@gmail.com',
 
   // Website / Portfolio
   websiteUrl: 'https://example.com',
 
-  // Project count badge
-  projectsCount: '99+',
+  // National Certificates count badge
+  projectsCount: '03',
 
-  // D. Profile & Technical Competencies
-  profileInfo: {
-    degree: 'Lorem Ipsum Dolor Sit Amet',
-    specialization: 'Consectetur Adipiscing Elit',
-    highlights: [
-      'Lorem ipsum dolor sit amet',
-      'Consectetur adipiscing elit',
-      'Sed do eiusmod tempor incididunt',
-      'Labore et dolore magna aliqua',
-    ],
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
+  // 1. Experiences Banner (15 titles)
+  achievements: [
+    { title: 'Lorem Ipsum Dolor Sit', icon: 'trophy' },
+    { title: 'Lorem Ipsum Consectetur', icon: 'medal' },
+    { title: 'Lorem Ipsum Adipiscing', icon: 'award' },
+    { title: 'Lorem Ipsum Eiusmod', icon: 'star' },
+    { title: 'Lorem Ipsum Tempor', icon: 'sparkles' },
+    { title: 'Lorem Ipsum Incididunt', icon: 'trophy' },
+    { title: 'Lorem Ipsum Labore', icon: 'medal' },
+    { title: 'Lorem Ipsum Dolore', icon: 'award' },
+    { title: 'Lorem Ipsum Magna', icon: 'star' },
+    { title: 'Lorem Ipsum Aliqua', icon: 'sparkles' },
+    { title: 'Lorem Ipsum Minim', icon: 'trophy' },
+    { title: 'Lorem Ipsum Veniam', icon: 'medal' },
+    { title: 'Lorem Ipsum Nostrud', icon: 'award' },
+    { title: 'Lorem Ipsum Ullamco', icon: 'star' },
+    { title: 'Lorem Ipsum Laboris', icon: 'sparkles' },
+  ],
 
-  // E. Dedicated Projects Carousel Showcase (Images removed)
+  // 2. Family (Wife, Son, Daughter)
+  family: [
+    {
+      relation: 'Wife',
+      name: "Wife's Name",
+      note: 'Spouse',
+    },
+    {
+      relation: 'Son',
+      name: "Son's Name",
+      note: 'Son',
+    },
+    {
+      relation: 'Daughter',
+      name: "Daughter's Name",
+      note: 'Daughter',
+    },
+  ],
+
+  // 3. Educational Background (College Degree & Master's Degree)
+  education: [
+    {
+      level: 'College Degree',
+      degree: 'Bachelor of Science in ...',
+      institution: 'College / University Name',
+      specialization: 'Major in ...',
+      year: 'Graduated',
+      description: 'Undergraduate degree program.',
+    },
+    {
+      level: "Master's Degree",
+      degree: 'Master of Arts in ...',
+      institution: 'Graduate School / University Name',
+      specialization: 'Major in ...',
+      year: 'Completed',
+      description: 'Postgraduate degree program.',
+    },
+  ],
+
+  // 4. National Certificates (TESDA NC II Credentials)
   projects: [
     {
-      id: 'project-1',
-      title: 'Electronics Product Assembly and Servicing',
-      category: 'National Certificate ||',
+      id: 'nc2-epas',
+      title: 'Electronics Product Assembly and Servicing NC II',
+      category: 'TESDA National Certificate II',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-      tags: ['Lorem', 'Ipsum', 'Dolor', 'Sit'],
-      linkUrl: 'https://example.com',
-      githubUrl: 'https://example.com',
+        'Certified competency in assembling, installing, calibrating, testing, and troubleshooting electronic components, circuits, and consumer electronic systems.',
+      tags: ['PCB Assembly', 'Circuit Testing', 'Soldering', 'Electronics Repair'],
+      linkUrl: '',
+      githubUrl: '',
     },
     {
-      id: 'project-2',
-      title: 'Mechatronics',
-      category: 'National Certificate ||',
+      id: 'nc2-mechatronics',
+      title: 'Mechatronics Servicing NC II',
+      category: 'TESDA National Certificate II',
       description:
-        'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.',
-      tags: ['Tempor', 'Incididunt', 'Labore'],
-      linkUrl: 'https://example.com',
-      githubUrl: 'https://example.com',
+        'Certified competency in installing, configuring, testing, and maintaining mechatronics systems, electropneumatics, sensors, and programmable logic controllers (PLCs).',
+      tags: ['PLC Systems', 'Pneumatics', 'Industrial Automation', 'Sensors & Actuators'],
+      linkUrl: '',
+      githubUrl: '',
     },
     {
-      id: 'project-3',
-      title: 'Computer System Servicing',
-      category: 'National Certificate ||',
+      id: 'nc2-css',
+      title: 'Computer System Servicing NC II',
+      category: 'TESDA National Certificate II',
       description:
-        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
-      tags: ['Magna', 'Aliqua', 'Minim'],
-      linkUrl: 'https://example.com',
-      githubUrl: 'https://example.com',
+        'Certified competency in assembling computer systems and networks, configuring routers and switches, installing operating systems, and server deployment.',
+      tags: ['Hardware Assembly', 'LAN Networking', 'OS Installation', 'Server Setup'],
+      linkUrl: '',
+      githubUrl: '',
     },
   ],
 

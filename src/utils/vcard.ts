@@ -55,7 +55,7 @@ export function generateVCardString(config: BusinessCardConfig): string {
 
   const phone = (config.phoneRaw || config.phoneNumber)?.trim()
   if (phone) {
-    lines.push(`TEL;TYPE=CELL,VOICE:${phone}`)
+    lines.push(`TEL;TYPE=CELL,VOICE,PREF:${phone}`)
   }
 
   if (config.emailAddress?.trim()) {
@@ -108,4 +108,69 @@ export function downloadVCard(config: BusinessCardConfig): void {
     document.body.removeChild(link)
     URL.revokeObjectURL(url)
   }, 300)
+}
+
+/**
+ * Automatically detects the device environment and opens the contact directly:
+ * - On Android: Directly triggers the native Android Contacts Application insert intent with phone number & details pre-filled.
+ * - On iOS (iPhone): Opens the native iOS Contact card preview to add directly to address book.
+ * - On Desktop / Other: Downloads the standard .vcf file.
+ */
+export function saveContactToPhone(config: BusinessCardConfig): {
+  success: boolean
+  method: 'android_intent' | 'ios_vcard' | 'vcard_download'
+} {
+  if (typeof window === 'undefined') {
+    return { success: false, method: 'vcard_download' }
+  }
+
+  const userAgent = navigator.userAgent || ''
+  const isAndroid = /android/i.test(userAgent)
+  const isIOS = /iphone|ipad|ipod/i.test(userAgent)
+
+  const rawPhone = (config.phoneRaw || config.phoneNumber || '').trim()
+  const phone = rawPhone.replace(/\s+/g, '')
+  const contactName = (config.displayName?.trim() || config.fullName || 'Sir Junio')
+    .replace(/\s+/g, ' ')
+    .trim()
+  const email = (config.emailAddress || '').trim()
+  const company = (config.businessName || 'STI Santa Rosa').trim()
+  const title = (config.professionalTitle || '').trim()
+
+  // 1. Android: Native Contacts Application Intent with Sir Junio's Number
+  if (isAndroid && phone) {
+    try {
+      const intentUrl = `intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;S.name=${encodeURIComponent(
+        contactName
+      )};S.phone=${encodeURIComponent(phone)};S.email=${encodeURIComponent(
+        email
+      )};S.company=${encodeURIComponent(company)};S.job_title=${encodeURIComponent(
+        title
+      )};end`
+      window.location.href = intentUrl
+      return { success: true, method: 'android_intent' }
+    } catch {
+      downloadVCard(config)
+      return { success: true, method: 'vcard_download' }
+    }
+  }
+
+  // 2. iOS (iPhone/iPad): Direct vCard navigation opens the native "Create Contact" card
+  if (isIOS) {
+    try {
+      const vCardContent = generateVCardString(config)
+      const blob = new Blob([vCardContent], { type: 'text/vcard;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      window.location.href = url
+      setTimeout(() => URL.revokeObjectURL(url), 4000)
+      return { success: true, method: 'ios_vcard' }
+    } catch {
+      downloadVCard(config)
+      return { success: true, method: 'vcard_download' }
+    }
+  }
+
+  // 3. Desktop / Fallback: Standard .vcf download
+  downloadVCard(config)
+  return { success: true, method: 'vcard_download' }
 }
