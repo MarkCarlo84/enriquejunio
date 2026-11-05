@@ -134,6 +134,28 @@ export const businessCardConfig: BusinessCardConfig = {
     },
   ],
 
+  // Family Photo Gallery
+  familyPhotos: [
+    {
+      id: 'family-portrait',
+      src: '/images/family-portrait.jpg',
+      title: 'Family Portrait',
+      subtitle: 'The Junio Family',
+    },
+    {
+      id: 'family-dinner',
+      src: '/images/family-dinner.jpg',
+      title: 'Celebration Dinner',
+      subtitle: 'Dining Together',
+    },
+    {
+      id: 'family-travel',
+      src: '/images/family-travel.jpg',
+      title: 'Victoria Peak, Hong Kong',
+      subtitle: 'Family Travels',
+    },
+  ],
+
   // 3. Educational Background (College Degree & Master's Degree)
   education: [
     {

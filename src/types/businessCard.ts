@@ -56,6 +56,16 @@ export interface FamilyMember {
   note?: string
 }
 
+export interface FamilyPhotoItem {
+  id?: string
+  /** Image source path or URL */
+  src: string
+  /** Photo title or caption */
+  title: string
+  /** Optional subtitle or description */
+  subtitle?: string
+}
+
 export interface GraduateProfileInfo {
   degree: string
   specialization: string
@@ -135,6 +145,9 @@ export interface BusinessCardConfig {
 
   /** Immediate family members (Wife, Son, Daughter, etc.) */
   family?: FamilyMember[]
+
+  /** Dedicated family photo gallery items */
+  familyPhotos?: FamilyPhotoItem[]
 
   /** Total project count display (e.g. "20+") */
   projectsCount?: string | number

@@ -472,7 +472,7 @@ img {
 .header-banner {
   position: relative;
   width: 100%;
-  height: 270px;
+  height: 190px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -486,7 +486,7 @@ img {
 }
 
 .header-banner--glass {
-  height: 195px;
+  height: 135px;
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
@@ -2538,6 +2538,475 @@ img {
   gap: 1.1rem;
 }
 
+/* Family Photo Showcase Frame */
+.family-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.family-photo-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000000;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-spring), border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.family-photo-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--line-hover);
+  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.5);
+}
+
+.family-photo-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0a0a0c;
+}
+
+.family-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  animation: familyPhotoFadeZoom 680ms var(--ease-out) both;
+  will-change: opacity, transform, filter;
+}
+
+@keyframes familyPhotoFadeZoom {
+  0% {
+    opacity: 0.25;
+    transform: scale(1.045);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+.family-photo-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.02) 40%, rgba(0, 0, 0, 0.88) 100%);
+  pointer-events: none;
+}
+
+/* Auto-Advance Story Progress Strip */
+.family-photo-progress-strip {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.85rem;
+  right: 6.4rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.family-photo-progress-track {
+  flex: 1;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.28);
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  position: relative;
+}
+
+.family-photo-progress-track.is-completed {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.family-photo-progress-fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  border-radius: var(--radius-full);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.family-photo-progress-track.is-active .family-photo-progress-fill {
+  animation: familyProgressFill linear forwards;
+}
+
+.family-photo-progress-strip.is-paused .family-photo-progress-fill {
+  animation-play-state: paused !important;
+}
+
+@keyframes familyProgressFill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Floating Hover Navigation Arrows */
+.family-photo-arrows {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.65rem;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-fast) ease;
+}
+
+.family-photo-card:hover .family-photo-arrows {
+  opacity: 1;
+}
+
+.family-photo-nav-arrow {
+  pointer-events: auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.family-photo-nav-arrow:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: scale(1.08);
+}
+
+.family-photo-zoom-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+  z-index: 2;
+}
+
+.family-photo-zoom-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: scale(1.05);
+}
+
+.family-photo-caption-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.95rem 1.15rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  z-index: 2;
+}
+
+.family-photo-caption-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  animation: familyCaptionFadeUp 420ms var(--ease-out) both;
+}
+
+@keyframes familyCaptionFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.family-photo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.family-photo-headline {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.family-photo-counter {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
+}
+
+/* Photo Switcher Tabs */
+.family-photo-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.15rem 0.1rem;
+  scrollbar-width: none;
+}
+
+.family-photo-switcher::-webkit-scrollbar {
+  display: none;
+}
+
+.family-photo-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem 0.35rem 0.4rem;
+  border-radius: var(--radius-full);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  color: var(--text-2);
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--duration-fast) ease;
+  flex-shrink: 0;
+}
+
+.family-photo-tab:hover {
+  border-color: var(--line-hover);
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+.family-photo-tab.is-active {
+  background: var(--invert-bg);
+  color: var(--invert-text);
+  border-color: var(--invert-bg);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.family-photo-tab-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.family-photo-tab-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+  animation: tabDotPulse 1.6s ease-in-out infinite alternate;
+  margin-left: -2px;
+}
+
+@keyframes tabDotPulse {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+/* Lightbox Modal */
+.family-lightbox-overlay {
+  z-index: 10000;
+}
+
+.family-lightbox-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  background: #0c0d12;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 28px 75px -15px rgba(0, 0, 0, 0.9);
+  animation: expModalSlideUp 260ms var(--ease-spring) both;
+}
+
+.family-lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.95rem 1.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #13141c;
+}
+
+.family-lightbox-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.family-lightbox-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.family-lightbox-stage {
+  position: relative;
+  width: 100%;
+  background: #000000;
+  display: grid;
+  place-items: center;
+  max-height: calc(88vh - 125px);
+  overflow: hidden;
+}
+
+.family-lightbox-img {
+  max-width: 100%;
+  max-height: calc(88vh - 125px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+}
+
+.family-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+  z-index: 10;
+}
+
+.family-lightbox-arrow:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.family-lightbox-arrow--prev {
+  left: 0.85rem;
+}
+
+.family-lightbox-arrow--next {
+  right: 0.85rem;
+}
+
+.family-lightbox-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.35rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #13141c;
+}
+
+.family-lightbox-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-2);
+}
+
+/* Light Theme Overrides for Lightbox */
+[data-theme='light'] .family-photo-card {
+  box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.16);
+}
+
+[data-theme='light'] .family-lightbox-dialog {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme='light'] .family-lightbox-header,
+[data-theme='light'] .family-lightbox-footer {
+  background: #f6f6f8;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='light'] .family-lightbox-title {
+  color: #0a0a0a;
+}
+
+[data-theme='light'] .family-lightbox-subtitle {
+  color: rgba(0, 0, 0, 0.65);
+}
+
 .family-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -3349,8 +3818,8 @@ img {
   }
 
   .header-banner {
-    height: 235px;
-    padding: 0.95rem 1rem 0;
+    height: 165px;
+    padding: 0.85rem 1rem 0;
   }
 
   .banner-brand-logo {
@@ -3371,7 +3840,7 @@ img {
   }
 
   .header-banner--glass {
-    height: 170px;
+    height: 120px;
   }
 
   .owner-name {

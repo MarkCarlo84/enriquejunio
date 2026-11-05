@@ -118,7 +118,11 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({
         {/* 2. Family Section */}
         {config.family && config.family.length > 0 && (
           <Reveal>
-            <FamilySection family={config.family} index={nextIndex()} />
+            <FamilySection
+              family={config.family}
+              photos={config.familyPhotos}
+              index={nextIndex()}
+            />
           </Reveal>
         )}
 
