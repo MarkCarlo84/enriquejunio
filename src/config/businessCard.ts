@@ -14,9 +14,8 @@ export const businessCardConfig: BusinessCardConfig = {
   professionalTitle: 'STI Santa Rosa Instructor',
   businessName: 'Sir Junio',
   shortDescription:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  availability: 'Lorem ipsum dolor',
-
+    'A passionate and dedicated educator who combines knowledge, creativity, and humor to make learning engaging and meaningful. Committed to inspiring students, nurturing potential, and creating a positive classroom environment.',
+    
   // Profile Picture (Banner removed)
   profileImage: '/images/sirjunio-profile.jpg',
   showBanner: false,
