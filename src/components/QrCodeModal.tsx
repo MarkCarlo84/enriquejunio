@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import React, { useEffect, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { X, Copy, Check, Share2, Nfc } from 'lucide-react'
+import { X, Share2, Nfc } from 'lucide-react'
 import type { BusinessCardConfig } from '../types/businessCard'
 import { generateQrMatrix, generateQrSvgPath } from '../utils/qrCode'
 
@@ -17,8 +17,6 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({
   config,
   onToast,
 }) => {
-  const [isCopied, setIsCopied] = useState(false)
-
   // Current page shareable URL
   const shareUrl = useMemo(() => {
     if (typeof window === 'undefined') return 'https://example.com'
@@ -58,9 +56,7 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(shareUrl)
-      setIsCopied(true)
       onToast('Link copied to clipboard')
-      setTimeout(() => setIsCopied(false), 2200)
     } catch {
       onToast('Could not copy link')
     }
@@ -145,23 +141,6 @@ export const QrCodeModal: React.FC<QrCodeModalProps> = ({
             <span className="qr-scan-hint">
               Point any camera at this QR code to view card
             </span>
-          </div>
-
-          {/* Share URL Pill */}
-          <div className="qr-url-row">
-            <span className="qr-url-text" title={shareUrl}>
-              {shareUrl}
-            </span>
-            <button
-              type="button"
-              className="qr-copy-btn"
-              onClick={handleCopy}
-              aria-label="Copy website link"
-              title="Copy link"
-            >
-              {isCopied ? <Check size={14} strokeWidth={2.4} /> : <Copy size={14} strokeWidth={2} />}
-              <span>{isCopied ? 'Copied' : 'Copy'}</span>
-            </button>
           </div>
         </div>
 

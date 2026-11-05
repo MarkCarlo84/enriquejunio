@@ -1308,13 +1308,14 @@ img {
 }
 
 .owner-title {
-  margin-top: 0.7rem;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.2rem;
-  line-height: 1.25;
+  margin-top: 0.65rem;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.35;
   color: var(--text);
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
 }
 
 .owner-bio {

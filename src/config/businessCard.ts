@@ -145,13 +145,13 @@ export const businessCardConfig: BusinessCardConfig = {
     {
       id: 'family-dinner',
       src: '/images/family-dinner.jpg',
-      title: 'Celebration Dinner',
+      title: 'Family Dinner',
       subtitle: 'Dining Together',
     },
     {
       id: 'family-travel',
       src: '/images/family-travel.jpg',
-      title: 'Victoria Peak, Hong Kong',
+      title: 'Gala with Family',
       subtitle: 'Family Travels',
     },
   ],
